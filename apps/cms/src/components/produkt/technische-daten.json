@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_produkt_technische_daten",
+  "info": {
+    "displayName": "Technische Daten",
+    "description": "Technische Spezifikationen eines Produkts"
+  },
+  "options": {},
+  "attributes": {
+    "bezeichnung": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "wert": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "einheit": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "gruppe": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}
