@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "hersteller",
+  "collectionName": "herstellers",
   "info": {
     "singularName": "hersteller",
-    "pluralName": "hersteller",
+    "pluralName": "herstellers",
     "displayName": "Hersteller",
     "description": "Hersteller von Heizungsprodukten"
   },
