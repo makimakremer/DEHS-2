@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kundengruppen",
+  "info": {
+    "singularName": "kundengruppe",
+    "pluralName": "kundengruppen",
+    "displayName": "Kundengruppe",
+    "description": "Kundengruppen für gestaffelte Preise und Rabatte"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "rabattProzent": {
+      "type": "decimal",
+      "default": 0
+    },
+    "beschreibung": {
+      "type": "text"
+    }
+  }
+}
