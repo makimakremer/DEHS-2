@@ -1,0 +1,134 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Produkt",
+    "description": "Heizungsprodukte im Sortiment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "artikelnummer": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 50
+    },
+    "ean": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "kurzbeschreibung": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "beschreibung": {
+      "type": "richtext"
+    },
+    "listenpreis": {
+      "type": "decimal",
+      "required": true
+    },
+    "leistungKw": {
+      "type": "decimal"
+    },
+    "energieeffizienzklasse": {
+      "type": "enumeration",
+      "enum": ["A+++", "A++", "A+", "A", "B", "C", "D"]
+    },
+    "produktTyp": {
+      "type": "enumeration",
+      "enum": [
+        "waermepumpe",
+        "gasheizung",
+        "oelheizung",
+        "pelletheizung",
+        "solarthermie",
+        "warmwasserspeicher",
+        "pufferspeicher",
+        "regelungstechnik",
+        "zubehoer",
+        "ersatzteile"
+      ]
+    },
+    "verfuegbar": {
+      "type": "boolean",
+      "default": true
+    },
+    "neuheit": {
+      "type": "boolean",
+      "default": false
+    },
+    "auslaufmodell": {
+      "type": "boolean",
+      "default": false
+    },
+    "seoTitle": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "seoDescription": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "hauptbild": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "galerie": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "dokumente": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["files"]
+    },
+    "technischeDaten": {
+      "type": "component",
+      "repeatable": true,
+      "component": "produkt.technische-daten"
+    },
+    "kategorie": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::kategorie.kategorie",
+      "inversedBy": "produkte"
+    },
+    "hersteller": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::hersteller.hersteller",
+      "inversedBy": "produkte"
+    },
+    "zubehoer": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product"
+    },
+    "ersatzteile": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}
