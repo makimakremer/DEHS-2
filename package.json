@@ -1,0 +1,23 @@
+{
+  "name": "dehs",
+  "version": "0.0.1",
+  "private": true,
+  "description": "DEHS - Deutsche Heizungssysteme Großhandel",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "clean": "turbo clean && rm -rf node_modules",
+    "dev:web": "turbo dev --filter=web",
+    "dev:cms": "turbo dev --filter=cms",
+    "build:web": "turbo build --filter=web",
+    "build:cms": "turbo build --filter=cms"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
