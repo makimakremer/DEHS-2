@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "anfragen",
+  "info": {
+    "singularName": "anfrage",
+    "pluralName": "anfragen",
+    "displayName": "Anfrage",
+    "description": "Kundenanfragen und Produktanfragen"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firma": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "ansprechpartner": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "telefon": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "betreff": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "nachricht": {
+      "type": "richtext",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["neu", "inBearbeitung", "angebotErstellt", "abgeschlossen"],
+      "default": "neu"
+    },
+    "mengen": {
+      "type": "json"
+    },
+    "interneNotizen": {
+      "type": "richtext"
+    },
+    "produkte": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product"
+    },
+    "kunde": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
