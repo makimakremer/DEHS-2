@@ -11,15 +11,14 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/strapi": "^5.4.2",
-    "@strapi/plugin-users-permissions": "^5.4.2",
-    "@strapi/plugin-i18n": "^5.4.2",
-    "@strapi/plugin-cloud": "^5.4.2",
+    "@strapi/strapi": "4.25.23",
+    "@strapi/plugin-users-permissions": "4.25.23",
+    "@strapi/plugin-i18n": "4.25.23",
     "pg": "^8.13.1",
-    "better-sqlite3": "^11.7.0"
+    "better-sqlite3": "^9.6.0"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
+    "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "strapi": {
