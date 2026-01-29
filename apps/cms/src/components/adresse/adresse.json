@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_adresse_adressen",
+  "info": {
+    "displayName": "Adresse",
+    "description": "Adressdaten für Rechnungs- und Lieferadressen"
+  },
+  "options": {},
+  "attributes": {
+    "firma": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "ansprechpartner": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "strasse": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "hausnummer": {
+      "type": "string",
+      "maxLength": 10
+    },
+    "plz": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10
+    },
+    "ort": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "land": {
+      "type": "string",
+      "default": "Deutschland",
+      "maxLength": 50
+    },
+    "zusatz": {
+      "type": "string",
+      "maxLength": 100
+    }
+  }
+}
