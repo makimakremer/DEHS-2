@@ -11,11 +11,15 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/strapi": "4.25.23",
-    "@strapi/plugin-users-permissions": "4.25.23",
     "@strapi/plugin-i18n": "4.25.23",
+    "@strapi/plugin-users-permissions": "4.25.23",
+    "@strapi/strapi": "4.25.23",
+    "better-sqlite3": "^9.6.0",
     "pg": "^8.13.1",
-    "better-sqlite3": "^9.6.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",

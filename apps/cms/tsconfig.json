@@ -1,9 +1,17 @@
 {
-  "extends": "@strapi/typescript-utils/tsconfigs/server",
   "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "lib": ["ES2019"],
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "resolveJsonModule": true
   },
-  "include": ["./", "src/**/*.json"],
-  "exclude": ["node_modules", "build", ".cache", "dist"]
+  "include": ["./src/**/*.ts", "./src/**/*.json", "./config/**/*.ts"],
+  "exclude": ["node_modules", "build", ".cache", "dist", ".tmp"]
 }
