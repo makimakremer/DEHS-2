@@ -48,7 +48,7 @@
     },
     "energieeffizienzklasse": {
       "type": "enumeration",
-      "enum": ["A+++", "A++", "A+", "A", "B", "C", "D"]
+      "enum": ["A_PLUS_PLUS_PLUS", "A_PLUS_PLUS", "A_PLUS", "A", "B", "C", "D"]
     },
     "produktTyp": {
       "type": "enumeration",
