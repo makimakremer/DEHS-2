@@ -5,10 +5,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 
   body {
-    @apply bg-white text-secondary-900 antialiased;
+    @apply bg-white text-neutral-900 antialiased;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-400 rounded-full hover:bg-neutral-500;
   }
 }
 
@@ -17,31 +31,44 @@
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  .card {
+    @apply rounded-2xl border border-neutral-200 bg-white shadow-sm transition-shadow;
   }
 
-  .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20;
   }
 
-  .btn-secondary {
-    @apply btn bg-secondary-100 text-secondary-900 hover:bg-secondary-200 focus:ring-secondary-500;
-  }
-
-  .btn-outline {
-    @apply btn border border-secondary-300 bg-transparent hover:bg-secondary-50 focus:ring-secondary-500;
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 via-accent-400 to-secondary-500 bg-clip-text text-transparent;
   }
 
   .input {
-    @apply block w-full rounded-md border border-secondary-300 px-3 py-2 text-sm placeholder-secondary-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500;
+    @apply block w-full rounded-md border border-neutral-300 px-3 py-2 text-sm placeholder-neutral-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500;
   }
 
   .label {
-    @apply block text-sm font-medium text-secondary-700;
+    @apply block text-sm font-medium text-neutral-700;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  .card {
-    @apply rounded-lg border border-secondary-200 bg-white shadow-sm;
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
