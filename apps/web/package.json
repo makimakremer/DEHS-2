@@ -9,17 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@shared/types": "workspace:*",
+    "framer-motion": "^12.34.0",
+    "lucide-react": "^0.564.0",
     "next": "^14.2.21",
+    "next-auth": "^4.24.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "next-auth": "^4.24.10",
-    "zod": "^3.24.1",
-    "@shared/types": "workspace:*"
+    "unsplash-js": "^7.0.20",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.12",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "@types/unsplash-js": "^7.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.21",
