@@ -27,9 +27,9 @@ async function fetchAPI<T>(
     ? "?" + new URLSearchParams(buildQueryString(params)).toString()
     : "";
 
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...(fetchOptions.headers || {}),
+    ...(fetchOptions.headers as Record<string, string> || {}),
   };
 
   if (API_TOKEN) {

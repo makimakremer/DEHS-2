@@ -51,8 +51,8 @@ export default async function ProduktdetailPage({ params }: PageProps) {
 
   const images = [
     attributes.hauptbild?.data,
-    ...(attributes.galerie?.data || []),
-  ].filter(Boolean);
+    ...(attributes.galerie?.map(media => media.data) || []),
+  ].filter((img): img is NonNullable<typeof img> => Boolean(img));
 
   return (
     <div className="py-8">
@@ -114,7 +114,7 @@ export default async function ProduktdetailPage({ params }: PageProps) {
             {/* Galerie */}
             {images.length > 1 && (
               <div className="mt-4 grid grid-cols-4 gap-2">
-                {images.slice(0, 4).map((image, index) => (
+                {images.slice(0, 4).map((image, index) => image && (
                   <div
                     key={index}
                     className="relative aspect-square overflow-hidden rounded bg-secondary-100"
@@ -232,8 +232,8 @@ export default async function ProduktdetailPage({ params }: PageProps) {
                     Technische Daten
                   </button>
                 )}
-              {attributes.dokumente?.data &&
-                attributes.dokumente.data.length > 0 && (
+              {attributes.dokumente &&
+                attributes.dokumente.length > 0 && (
                   <button className="border-b-2 border-transparent px-1 py-4 text-sm font-medium text-secondary-600 hover:border-secondary-300 hover:text-secondary-900">
                     Dokumente
                   </button>

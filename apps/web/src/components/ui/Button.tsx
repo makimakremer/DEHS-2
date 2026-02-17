@@ -52,7 +52,7 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href}>
+      <Link href={href as any}>
         <motion.span
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -64,12 +64,14 @@ export function Button({
     );
   }
 
+  const { onAnimationStart, onAnimationEnd, onAnimationIteration, ...buttonProps } = props;
+
   return (
     <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={baseClasses}
-      {...props}
+      {...(buttonProps as any)}
     >
       {content}
     </motion.button>

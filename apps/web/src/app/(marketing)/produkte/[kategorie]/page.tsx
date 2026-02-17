@@ -86,7 +86,7 @@ export default async function KategoriePage({
 
         {/* Category Header */}
         <div className="mb-8">
-          {hasImage && (
+          {hasImage && category.attributes.bild?.data?.attributes?.url && (
             <div className="relative mb-6 h-48 overflow-hidden rounded-lg">
               <Image
                 src={getStrapiImageUrl(
