@@ -24,6 +24,10 @@ pnpm build:cms        # Nur CMS
 
 # Linting
 pnpm lint
+
+# Cache Issues beheben
+rm -rf apps/web/.next apps/web/node_modules/.cache  # Bei Next.js Fehlern
+rm -rf apps/cms/.cache                               # Bei Strapi TypeScript Fehlern
 ```
 
 **Wichtig:** Frontend und CMS müssen in separaten Terminals laufen:
@@ -34,7 +38,7 @@ pnpm lint
 
 ### Monorepo Structure
 
-- **apps/web/** - Next.js 14 Frontend mit App Router
+- **apps/web/** - Next.js 14 Frontend mit App Router, Framer Motion, Lucide Icons
 - **apps/cms/** - Strapi 4 Backend/CMS
 - **packages/shared/** - Gemeinsame TypeScript-Typen zwischen Frontend und Backend
 
@@ -52,6 +56,18 @@ Next.js (SSR) → Strapi REST API → SQLite/PostgreSQL
 - `(marketing)/` - Öffentliche Seiten mit Marketing-Layout (Header/Footer)
   - Startseite, Produktübersicht, Kategorie-Seiten, Produktdetails
 
+**Design System (Modern Tech):**
+- **Farbpalette:** Deep Blue (#1f2a89), Electric Blue (#22d3ee), Teal (#14b8a6)
+- **Typography:** Inter (Body), Space Grotesk (Display/Headings)
+- **Animations:** Framer Motion für Scroll-Animationen, Hover-Effekte, Stagger-Grids
+- **Icons:** Lucide React (keine Emojis in Production-Code)
+
+**UI Component Library (`components/ui/`):**
+- `Button.tsx` - Animated button mit 4 Varianten (primary, secondary, outline, ghost)
+- `Badge.tsx` - Status badges mit 5 Farbvarianten
+- `AnimatedSection.tsx` - Scroll-triggered animations (fade, slide-up, slide-left, scale)
+- Alle Components nutzen Framer Motion für Animationen
+
 **API Client Pattern:**
 - `lib/strapi/client.ts` ist der zentrale API-Client
 - Alle Strapi-Anfragen gehen durch `fetchAPI()` Helper
@@ -60,8 +76,15 @@ Next.js (SSR) → Strapi REST API → SQLite/PostgreSQL
 
 **Key Files:**
 - `lib/strapi/client.ts` - Strapi API Client mit Helpers
-- `components/products/` - Wiederverwendbare Produktkomponenten
+- `lib/animations.ts` - Wiederverwendbare Framer Motion Varianten
+- `components/ui/` - Reusable UI Component Library
+- `components/products/` - Produktkomponenten (mit Framer Motion)
 - `app/(marketing)/produkte/` - Dynamische Routen für Produkte
+
+**Client Components vs Server Components:**
+- Animation-Komponenten benötigen `'use client'` (Framer Motion)
+- Daten-Fetching sollte in Server Components bleiben
+- `ProductCard` und `ProductGrid` sind Client Components (Animationen)
 
 ### Backend Architecture (apps/cms/)
 
@@ -126,6 +149,7 @@ import type { Product, Category } from "@shared/types";
 NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=dev-secret-change-in-production
+NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_key_here  # Optional: für Unsplash Integration
 ```
 
 **apps/cms/.env:**
@@ -137,6 +161,23 @@ ADMIN_JWT_SECRET=tobemodified            # Für Produktion ändern
 ```
 
 ## Common Issues & Solutions
+
+### Next.js Module-Not-Found Errors (Framer Motion)
+
+Bei Fehlern wie `Cannot find module './.vendor-chunks/motion-dom@...'`:
+```bash
+# Stoppe Dev-Server
+pkill -f "next dev"
+
+# Lösche Caches
+rm -rf apps/web/.next apps/web/node_modules/.cache
+
+# Optional: Dependencies neu installieren
+pnpm install
+
+# Server neu starten
+pnpm dev:web
+```
 
 ### Strapi TypeScript Errors
 
@@ -157,6 +198,14 @@ Lösung: Verwende `A_PLUS_PLUS_PLUS`, `A_PLUS_PLUS`, `A_PLUS` (siehe `product/sc
 
 ## Development Workflow
 
+### Adding New UI Component
+
+1. Create in `apps/web/src/components/ui/`
+2. Use Framer Motion für Animationen (`'use client'` directive)
+3. Follow existing patterns (Button, Badge, AnimatedSection)
+4. Export from `components/ui/index.ts`
+5. Use Modern Tech Farbpalette (primary, accent, secondary, neutral)
+
 ### Adding New Strapi Content-Type
 
 1. Create folder: `apps/cms/src/api/{content-type-name}/content-types/{content-type-name}/`
@@ -171,13 +220,21 @@ Lösung: Verwende `A_PLUS_PLUS_PLUS`, `A_PLUS_PLUS`, `A_PLUS` (siehe `product/sc
 2. Use Server Components für Data Fetching (async/await)
 3. Import types from `@shared/types`
 4. Use Strapi Client: `import { getProducts } from "@/lib/strapi/client"`
+5. Wrap animated sections in `<AnimatedSection>` for scroll animations
 
 ### Image Handling
 
 - Strapi Media URLs sind relativ: `/uploads/...`
 - Use `getStrapiImageUrl()` Helper aus `lib/strapi/client.ts`
 - Next.js Image Component mit `fill` für responsive images
-- Allowed domains in `next.config.js` konfiguriert
+- Allowed domains in `next.config.js` konfiguriert (Strapi + Unsplash)
+
+### Animation Best Practices
+
+- Use `AnimatedSection` für scroll-triggered animations
+- Import animation variants from `lib/animations.ts` (fadeInUp, staggerContainer, scaleIn)
+- All Client Components mit Animationen benötigen `'use client'` directive
+- Test auf `prefers-reduced-motion` (automatisch in globals.css)
 
 ## Testing Setup
 
@@ -197,3 +254,5 @@ Nach frischer Installation:
 - Strapi 4 nutzt SQLite in Development, PostgreSQL für Production
 - Deutsche Sprache durchgehend (Content, UI, Fehlermeldungen)
 - B2B-Fokus: Preise nur für eingeloggte Kunden (geplant)
+- **Keine Emojis in Production-Code** - verwende Lucide React Icons
+- Animationen sollten subtil und professionell sein (B2B-Kontext)
